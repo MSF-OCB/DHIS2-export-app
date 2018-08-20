@@ -1,4 +1,4 @@
-# DHIS2-export-app
+# DHIS2 Export App
 
 HISP Custom Export App
 
