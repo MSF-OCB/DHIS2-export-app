@@ -183,6 +183,19 @@
                 </td>
             </tr>
             <tr>
+                <td >
+                    <label>Dowload Choise </label>
+                </td>
+                <td class='col-sm-4 col-md-3'>
+                    <select ng-model="selectedChoise"
+                        class="form-control"
+                        <option value="">Please select program</option>
+                        <option value="display">Display data before download</option>
+                        <option value="noDisplay">Download Without Displaying</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td> <label>Choose Date Between </label></td>
                 <td>
                 <input calendar ng-model='startdate' ng-change="updateStartDate(startdate);" required />
@@ -193,7 +206,7 @@
         </table>
 
         <div class="col-md-6 trim">
-            <button type="button" class="btn btn-primary" ng-click="generateReport(selectedProgram, report, selectedOuMode);showLoad();" ng-disabled="!selectedProgram">{{'generate_report'| translate}}</button>
+            <button type="button" class="btn btn-primary" ng-click="generateReport(selectedProgram, selectedChoise, report, selectedOuMode);showLoad();" ng-disabled="!selectedProgram">{{'generate_report'| translate}}</button>
         </div>
         <div class="col-md-6 trim">
         <button id="btnExport" class="btn btn-primary" ng-click="fnExcelReport();" ng-disabled="isDisabled"> Export To Excel </button>
