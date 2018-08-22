@@ -481,28 +481,6 @@ msfReportsApp
             return JSON.parse(JSON.stringify(temprMap));;
         };;
 
-        var getTeiDataWithName = function(eventsAtrr) {
-            //console.log(eventsAtrr);
-            var temprMaps = [];
-           
-            for (var r = 0, lenn = eventsAtrr.length; r < lenn; r++) {
-                var valuess = eventsAtrr[r];
-                var count = keyMap[valuess.attribute];
-                if (valuess.attribute == "qak2Z7cCMpD" || valuess.attribute == "ezNf2g94ycZ" || valuess.attribute == "FzXnQEnYFa5") {
-                    var value = "PRIVATE";
-                } else {
-                    var value = valuess.value;
-                }
-                var optionValue = optionSetArr[value];
-                if (typeof optionValue === undefined || optionValue === undefined) {} else {
-                    var value = optionValue;
-                }
-                temprMaps[count] = valuess.displayName;
-            }
-            //console.log(temprMap);
-            return JSON.parse(JSON.stringify(temprMaps));;
-        };;
-
         var teiResponse;
         var terminateWork = false;
         var oldIndex = 0;
@@ -528,7 +506,6 @@ msfReportsApp
                 var teiattr = teiArray[tei];
                 if (teiattr === undefined) {} else {
                     tempMap = getTeiData(teiattr);
-                    tempMapWithName = getTeiDataWithName(teiattr)
                 }
                 var emptyRows = 0;
                 var myWorker6 = new Worker('worker.js');
@@ -555,11 +532,8 @@ msfReportsApp
                             console.log("empty row found!");
                             emptyRows++;
                             tempMap = getTeiData(teiResponse);
-                            tempMapWithName = getTeiDataWithName(teiResponse)
                         }
 
-                        //console.log(tempMap);
-                        //console.log(tempMapWithName);
                         finalKeyMap = JSON.parse(JSON.stringify(tempMap));
 
                        
@@ -573,15 +547,12 @@ msfReportsApp
                         }
                         finalKeyMap[3] = eventElement.orgUnitName;
                         
-                        //console.log(tempMapWithName);
-                        //finalKeyMapWithName = tempMapWithName;
-
                         
                         finalKeyMapWithName["Event name"] = finalKeyMap[1];
                         finalKeyMapWithName["Event date"] = finalKeyMap[2];
                         finalKeyMapWithName["Orgunit"] = finalKeyMap[3];
 
-                         /*Mapping the key with names YK:
+                        /*Mapping the key with names YK:
                         
                         var dataKeys = finalKeyMap;
     
@@ -589,8 +560,6 @@ msfReportsApp
                             finalKeyMapWithName[tempMapWithName[key]] = dataKeys[key];
                         }
                         */
-                        
-                        //console.log(tempMapWithName);
 
                         if (finalKeyMap[1] == "First Visit") {
                             var newRow = "<tr style='background-color:#abbedf'>";
@@ -642,7 +611,7 @@ msfReportsApp
                         getEnrollments(keyMap, program, keyMapWithName,choise,dataArray);
                     }
 
-                    console.log("oldIndex =" + oldIndex + " pageIndex=" + pageIndex + "emptyRows=" + emptyRows + " and total enrollments=" + totalEnrollments);
+                    //console.log("oldIndex =" + oldIndex + " pageIndex=" + pageIndex + "emptyRows=" + emptyRows + " and total enrollments=" + totalEnrollments);
                     if ((oldIndex + pageIndex + emptyRows) === totalEnrollments) {
                         
                         terminateWork = true;
