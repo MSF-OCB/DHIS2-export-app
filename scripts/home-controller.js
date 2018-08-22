@@ -401,17 +401,23 @@ msfReportsApp
 
         };
 
-        var printReport = function(finalKeyMap, newRow, finalKeyMapWithName) {
+        var printReport = function(finalKeyMap, newRow, finalKeyMapWithName, keyMapWithName, choise) {
             for (var h = 1, arrLen3 = keyMap2.length; h < arrLen3; h++) {
                 //console.log(finalKeyMap)
                 if (finalKeyMap.hasOwnProperty(h) && finalKeyMap[h] != null) {
                     newRow = newRow + "<td>" + finalKeyMap[h] + "</td>";
+                    finalKeyMapWithName[keyMapWithName[h]] = finalKeyMap[h];
                 } else {
                     newRow = newRow + "<td></td>";
+                    finalKeyMapWithName[keyMapWithName[h]] = null;
                 }
             }
-            //console.log(finalKeyMapWithName);
-            $('.reporttable').append(newRow + "</tr>");
+            if(choise == "display"){
+                $('.reporttable').append(newRow + "</tr>");
+            }
+            else{
+                return finalKeyMapWithName;
+            }
         };
 
 
@@ -543,6 +549,7 @@ msfReportsApp
                     data5.events.forEach(function(eventElement) {
                         var finalKeyMap = [];
                         var finalKeyMapWithName = [];
+                        var rowData = [];
                         //finalKeyMap = tempMap;
                         if (tempMap[4] === undefined) {
                             console.log("empty row found!");
@@ -575,12 +582,13 @@ msfReportsApp
                         finalKeyMapWithName["Orgunit"] = finalKeyMap[3];
 
                          /*Mapping the key with names YK:
-                        */
+                        
                         var dataKeys = finalKeyMap;
     
                         for (let key in dataKeys) {
                             finalKeyMapWithName[tempMapWithName[key]] = dataKeys[key];
                         }
+                        */
                         
                         //console.log(tempMapWithName);
 
@@ -611,14 +619,15 @@ msfReportsApp
                             }
                             var count2 = keyMap[pidd + '+' + eventElement.dataValues[n].dataElement];
                             finalKeyMap[count2] = value;
-                            finalKeyMapWithName[keyMapWithName[count2]] = value
+                            //finalKeyMapWithName[count2] = value
                         }
 
-                        dataArray.push(finalKeyMapWithName);
+                        //dataArray.push(finalKeyMapWithName);
+                        
                         //console.log(dataArray);
-                        if(choise == "display"){
-                            printReport(finalKeyMap, newRow, finalKeyMapWithName);
-                        }
+                       rowData = printReport(finalKeyMap, newRow, finalKeyMapWithName, keyMapWithName, choise);
+                       dataArray.push(rowData);
+                        
                      
                     });
                     w6flag = true;
@@ -633,7 +642,7 @@ msfReportsApp
                         getEnrollments(keyMap, program, keyMapWithName,choise,dataArray);
                     }
 
-                    //console.log("oldIndex =" + oldIndex + " pageIndex=" + pageIndex + "emptyRows=" + emptyRows + " and total enrollments=" + totalEnrollments);
+                    console.log("oldIndex =" + oldIndex + " pageIndex=" + pageIndex + "emptyRows=" + emptyRows + " and total enrollments=" + totalEnrollments);
                     if ((oldIndex + pageIndex + emptyRows) === totalEnrollments) {
                         
                         terminateWork = true;
