@@ -466,7 +466,11 @@ msfReportsApp
             for (var r = 0, lenn = eventsAtrr.length; r < lenn; r++) {
                 var valuess = eventsAtrr[r];
                 var count = keyMap[valuess.attribute];
-                if (valuess.attribute == "qak2Z7cCMpD" || valuess.attribute == "ezNf2g94ycZ" || valuess.attribute == "FzXnQEnYFa5") {
+                //console.log(valuess);
+                /*
+                    temp Hard codes for Private fields based attribute codes in Lebanon and Embu (to be corrected on upgrade to 2.30).
+                */
+                if (valuess.code == "Alt_phone_number_private" || valuess.code == "Patient_name_private" || valuess.code == "Phone_number_private") {
                     var value = "PRIVATE";
                 } else {
                     var value = valuess.value;
