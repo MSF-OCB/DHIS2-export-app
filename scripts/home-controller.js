@@ -443,7 +443,7 @@ msfReportsApp
                 if (w0flag) {
                     myWorker0.terminate();
                     document.getElementById('loader').style.display = "none";
-                    //  document.getElementById('loaderdata').style.display = "none";
+                    document.getElementById('loaderdata').style.display = "none";
                 }
             });
 
@@ -610,12 +610,16 @@ msfReportsApp
                         //  document.getElementById('loader').style.display = "none";
                     }
                     if (pageIndex == 50) {
-                        pagingFlag = true;
                         oldIndex = oldIndex + pageIndex;
-                        getEnrollments(keyMap, program, keyMapWithName,choise,dataArray);
+                        pageIndex=0;
+                        if (oldIndex != totalEnrollments){
+                            alert(oldIndex+":"+totalEnrollments);
+                            pagingFlag = true;
+                            getEnrollments(keyMap, program, keyMapWithName,choise,dataArray);
+                        }
                     }
 
-                    //console.log("oldIndex =" + oldIndex + " pageIndex=" + pageIndex + "emptyRows=" + emptyRows + " and total enrollments=" + totalEnrollments);
+                    console.log("Index =" + oldIndex + ":" + pageIndex + ":" + emptyRows + "=" + totalEnrollments);
                     if ((oldIndex + pageIndex + emptyRows) === totalEnrollments) {
                         
                         terminateWork = true;
