@@ -624,7 +624,7 @@ msfReportsApp
                         }
                     }
 
-                    console.log("Index =" + oldIndex + ":" + pageIndex + ":" + emptyRows + "=" + totalEnrollments);
+                    //console.log("Index =" + oldIndex + ":" + pageIndex + ":" + emptyRows + "=" + totalEnrollments);
                     if ((oldIndex + pageIndex + emptyRows) === totalEnrollments) {
                         
                         terminateWork = true;
