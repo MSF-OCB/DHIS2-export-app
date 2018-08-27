@@ -141,7 +141,7 @@ msfReportsApp
             events: []
         };
 
-        var gettei = function(tei) {
+        var getteis = function(tei) {
             var mwflag7 = false;
             var data = "";
             $.ajax({
@@ -155,6 +155,26 @@ msfReportsApp
             });
 
             return data;
+        };
+
+        var gettei = function(tei) {
+            var mwflag7 = false;
+            $.get('../../trackedEntityInstances/" + tei + ".json?&skipPaging=true', function (data) {
+                if( !data || data === ""){
+                    // error
+                    return;
+                }
+                var json;
+                try {
+                    json = jQuery.parseJSON(data);
+                } catch (e) {
+                    // error
+                    return;
+                }
+
+                return json;
+
+            }, "text");
         };
 
         var mapRemainingTei = function(teisTobeAdded, teiArr) {
