@@ -141,22 +141,6 @@ msfReportsApp
             events: []
         };
 
-        var getteis = function(tei) {
-            var mwflag7 = false;
-            var data = "";
-            $.ajax({
-                async: false,
-                type: "GET",
-                url: "../../trackedEntityInstances/" + tei + ".json?&skipPaging=true",
-                success: function(response) {
-                    data = response;
-                }
-
-            });
-
-            return data;
-        };
-
         var gettei = function(tei) {
             var mwflag7 = false;
             $.get('../../trackedEntityInstances/" + tei + ".json?&skipPaging=true', function (data) {
@@ -207,9 +191,9 @@ msfReportsApp
             var cEventsId = [];
             var teisTobeAdded = [];
             //document.getElementById('btnExportData').disabled = true;
-            document.getElementById('loader').style.display = "block";
+            //document.getElementById('loader').style.display = "block";
 
-
+            /*
             var myWorkerJson4 = new Worker('worker.js');
             var url4 = '../../events.json?ou=' + $scope.selectedOrgUnit.id + '&program=' + program.id + '&lastUpdatedStartDate=' + $scope.startdateSelected + '&lastUpdatedEndDate=' + $scope.enddateSelected + '&includeDeleted=true&skipPaging=true';
             myWorkerJson4.postMessage(url4);
@@ -234,6 +218,7 @@ msfReportsApp
                     mapRemainingTei(teisTobeAdded, teiArr);
                 }
             });
+            */
 
             var myWorkerJson1 = new Worker('worker.js');
             var url1 = '../../enrollments.json?ou=' + $scope.selectedOrgUnit.id + '&ouMode=DESCENDANTS&program=' + program.id + '&programStartDate=' + $scope.startdateSelected + '&programEndDate=' + $scope.enddateSelected + '&skipPaging=true';
@@ -252,7 +237,7 @@ msfReportsApp
                     myWorkerJson1.terminate();
                 }
             });
-
+            /*
             var myWorkerJson2 = new Worker('worker.js');
             var url2 = '../../trackedEntityInstances.json?ou=' + $scope.selectedOrgUnit.id + '&program=' + program.id + '&programStartDate=' + $scope.startdateSelected + '&programEndDate=' + $scope.enddateSelected + '&skipPaging=true';
             myWorkerJson2.postMessage(url2);
@@ -272,6 +257,7 @@ msfReportsApp
                     myWorkerJson2.terminate();
                 }
             });
+            */
         };
 
         $scope.downloadJson = function() {
@@ -528,7 +514,7 @@ msfReportsApp
                 var tempMapWithName = [];
 
                 var teiattr = teiArray[tei];
-                if (teiattr === undefined) {} else {
+                if (typeof teiattr !== 'undefined' && teiattr.length > 0){
                     tempMap = getTeiData(teiattr);
                 }
                 var emptyRows = 0;
@@ -633,7 +619,6 @@ msfReportsApp
                         oldIndex = oldIndex + pageIndex;
                         pageIndex=0;
                         if (oldIndex != totalEnrollments){
-                            alert(oldIndex+":"+totalEnrollments);
                             pagingFlag = true;
                             getEnrollments(keyMap, program, keyMapWithName,choise,dataArray);
                         }
@@ -644,9 +629,10 @@ msfReportsApp
                         
                         terminateWork = true;
                         $scope.reportdone = true;
-                        handleLoader();
+                        //handleLoader();
                         // document.getElementById('loader').style.display = "none";
                         alert("Click ok to Download Excel file")
+                        document.getElementById('loader').style.display = "none";
                        
                         if(choise == "noDisplay"){
                             /* converting array to json files for Xcell export YK:
