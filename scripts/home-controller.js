@@ -647,7 +647,8 @@ msfReportsApp
                             XLSX.utils.book_append_sheet(wb, ws, "data");
 
                             /* write workbook and force a download */
-                            XLSX.writeFile(wb, "client_reports.xlsx");
+                            var fileName = $scope.selectedOrgUnit.name + "_" + $scope.startdateSelected + "_" + $scope.enddateSelected + ".xlsx";
+                            XLSX.writeFile(wb, fileName);
                         }
 
                         oldIndex = 0;
