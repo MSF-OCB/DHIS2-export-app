@@ -501,6 +501,8 @@ msfReportsApp
             flag = enrollmentsArr.length;
             if (enrollmentsArr.length == 0) {
                 w6flag = true;
+                alert("there is not data between: " + $scope.startdateSelected + " and " + $scope.enddateSelected);
+                document.getElementById('loader').style.display = "none";
             }
             var g = 0;
             var pageIndex = 0;
