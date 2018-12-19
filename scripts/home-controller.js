@@ -48,14 +48,18 @@ msfReportsApp
         getAllPrograms();
         // Listen for OU changes
         selection.setListenerFunction(function() {
+
             $scope.selectedOrgUnitUid = selection.getSelected();
+            //console.log("setListenerFunction",$scope.selectedOrgUnitUid)
             loadPrograms();
         }, false);
 
         loadPrograms = function() {
+            
             MetadataService.getOrgUnit($scope.selectedOrgUnitUid).then(function(orgUnit) {
                 $timeout(function() {
                     $scope.selectedOrgUnit = orgUnit;
+                    console.log("loadPrograms",orgUnit)
                 });
             });
         }
@@ -74,6 +78,7 @@ msfReportsApp
 
         function getAllPrograms() {
             MetadataService.getAllPrograms().then(function(prog) {
+                console.log("getAllPrograms",prog)
                 $scope.allPrograms = prog.programs;
                 $scope.programs = [];
                 for (var i = 0; i < prog.programs.length; i++) {
@@ -90,13 +95,14 @@ msfReportsApp
 
 
         $scope.loadProgramStages = function(response) {
+            console.log("loadProgramStages",response)
             psArray = [];
             for (var i = 0; i < response.programStages.length; i++) {
                 psArray[response.programStages[i].id] = response.programStages[i].name;
             }
             $scope.program = response;
             document.getElementById('loader').style.display = "block";
-            document.getElementById('loaderdata').innerHTML = "Please wait, loading data!";
+            document.getElementById('loaderdata').innerHTML = "Please wait, loading Program Stages!";
             getOptionName();
             getOptionName2();
         };
@@ -142,7 +148,7 @@ msfReportsApp
         };
 
         var gettei = function(tei) {
-            var mwflag7 = false;
+            //var mwflag7 = false;
             $.get('../../trackedEntityInstances/" + tei + ".json?&skipPaging=true', function (data) {
                 if( !data || data === ""){
                     // error

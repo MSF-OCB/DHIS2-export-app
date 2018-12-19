@@ -1,1 +1,30 @@
-{"version":"2.0","name":"Tracker Data Exporter","description":"Export the data of all tracked entity instances ","icons":{"16":"img/icon-e-app.png","48":"img/icon-e-app.png","128":"img/icon-e-app.png"},"developer":{"url":"http://github.com/sidhanshu28","name":"Sidhanshu Monga","company":"HISP India","email":"sidhanshumonga28@gmail.com"},"activities":{"dhis":{"href":"http://localhost:8080/dhis","namespace":null}},"folderName":null,"baseUrl":null,"launchUrl":null,"key":null,"launch_path":"index.html","installs_allowed_from":null,"default_locale":"en"}
+{
+  "version": "2.1",
+  "name": "Tracker Data Exporter 2.30",
+  "description": "Export the data of all tracked entity instances ",
+  "icons": {
+    "16": "img/icon-e-app.png",
+    "48": "img/icon-e-app.png",
+    "128": "img/icon-e-app.png"
+  },
+  "developer": {
+    "url": "https://github.com/MSF-OCB/dhis2-export-app.git",
+    "name": "eHealth",
+    "company": "MSF",
+    "email": "thierry.sikora@brussels.msf.org"
+  },
+  "activities": {
+    "dhis": {
+      "href": "*",
+      "namespace": null
+    }
+  },
+  "appType": "APP",
+  "folderName": null,
+  "baseUrl": null,
+  "launchUrl": null,
+  "key": null,
+  "launch_path": "/index.html",
+  "installs_allowed_from": null,
+  "default_locale": "en"
+}
